@@ -3,7 +3,7 @@ from user.models import User
 
 class Student(models.Model):
 
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     is_high_school = models.BooleanField(default=False)
     is_university = models.BooleanField(default=False)
@@ -14,3 +14,6 @@ class Student(models.Model):
     class Meta:
         db_table = "student"
         ordering = ["created_at"]
+
+    def __str__(self):
+        return self.user_id.name
