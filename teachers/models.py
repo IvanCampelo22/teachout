@@ -17,3 +17,46 @@ class Teachers(models.Model):
 
     def __str__(self):
         return self.teacher_name
+
+
+class Curriculum(models.Model):
+
+    BIOLOGY = "BIO"
+    MATH = "MATH"
+    CHEMISTRY = "CHEM"
+    PHYSICS = "PHYSC"
+    ENGLISH = "ENG"
+    SUBJECTS_CHOICES = {
+        BIOLOGY: "Biology",
+        MATH: "Mathematics",
+        CHEMISTRY: "Chemistry",
+        PHYSICS: "Physics",
+        ENGLISH: "English",
+    }
+    id = models.AutoField(primary_key=True, null=False)
+    description = models.TextField(null=False)
+    subject = models.CharField(max_length=8, choices=SUBJECTS_CHOICES, null=False)
+    created_at = models.DateField(auto_now_add=True)
+    updated_at = models.DateField(auto_now=True)
+    
+    class Meta: 
+        db_table = "curriculum"
+
+    def __str__(self):
+        return self.description
+
+
+class Academic(models.Model):
+
+    id = models.AutoField(primary_key=True, null=False)
+    curriculum_id = models.ForeignKey(Curriculum, on_delete=models.CASCADE)
+    degree_title = models.TextField(null=False)
+    degree_url = models.TextField(null=False)
+    image = models.ImageField(null=True)
+    created_at = models.DateField(auto_now_add=True)
+
+    class Meta: 
+        db_table = "academics"
+
+    def __str__(self):
+        return self.degree_title
