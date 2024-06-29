@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8
+    ports:
+      - '3307:3306'
+    environment:
+       MYSQL_DATABASE: 'teachout'
+       MYSQL_USER: 'dee'
+       MYSQL_PASSWORD: 'password'
+       MYSQL_ROOT_PASSWORD: 'password'
+       MYSQL_HOST: ''
+
+  web:
+    build: .
+    command: sh -c "python3 manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  data:

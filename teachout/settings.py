@@ -85,10 +85,10 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "teachout",
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT"),
+        "USER": "root",
+        "PASSWORD": "password",
+        "HOST": "db",
+        "PORT": 3306,
     }
 }
 
