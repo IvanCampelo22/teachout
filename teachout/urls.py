@@ -16,7 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from user import views 
+from user.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', views.create_users, name='create-users'),  
+    path('users/<int:user_id>/', views.get_user, name='get-users'), 
+    path('users-delete/<int:user_id>/', views.delete_user, name='delete-users'),
+    path('users-list', views.users_list, name='users_list'),
+    path('users-update/<int:user_id>/', views.update_user, name='update-users'),
+    path('home/', index) 
 ]

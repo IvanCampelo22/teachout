@@ -6,7 +6,6 @@ class User(models.Model):
     name = models.CharField(max_length=420, null=False)
     email = models.EmailField(null=False, unique=True)
     username = models.CharField(max_length=120, null=False)
-    image = models.ImageField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     is_teacher = models.BooleanField(default=False)
