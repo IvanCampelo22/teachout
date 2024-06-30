@@ -84,6 +84,9 @@ def delete_user(request, user_id):
         return redirect(reverse('users_list'))
     except Http404:
         return HttpResponseNotFound("Usuário não encontrado")
+    
+def login(request):
+    return render(request, 'user/login.html', {})
 
 def index(request):
     return render(request, 'index.html', {})
