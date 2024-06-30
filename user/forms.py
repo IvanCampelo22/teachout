@@ -7,12 +7,9 @@ class UserForm(ModelForm):
     
     class Meta:
         model = User
-        fields = ["name", "email", "username"]
+        fields = ["name", "email", "username", "is_teacher", "is_student"]
         labels = {
             "name": _("Name"),
-        }
-        help_texts = {
-            "name": _("Example: João Silva"),
         }
         error_messages = {
             "name": {

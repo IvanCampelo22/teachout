@@ -11,83 +11,138 @@
     <link rel="stylesheet" href="{% static 'fa/css/all.min.css' %}">
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <title>Login</title>
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Remover o scroll */
+        }
+
+        .container-fluid, .row, .col-md-6, .half-screen {
+            height: 100%; /* Garantir que cada div ocupe 100% da altura */
+        }
+
+        .bg-image {
+            background-image: url("{% static 'images/teachout.jpg' %}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-bg {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+    </style>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-</nav>
+<body>
+    {% include "base/navbar.html" %}
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-6">
-            <h2>Sign-in</h2>
-            <form action="/user_create/" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    {% if form %}
-                        <div>
-                            <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
-                            {{ form.name }}
-                            {% if form.name.help_text %}
-                                <small class="form-text text-muted">{{ form.name.help_text }}</small>
-                            {% endif %}
-                            {% for error in form.name.errors %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ error }}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 half-screen bg-image">
+            </div>
+            <div class="col-md-6 half-screen form-container">
+                <div class="form-bg">
+                    <h2 class="text-center">Cadastre-se</h2>
+                    <form action="/users/" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            {% if form %}
+                                <div class="mb-3">
+                                    <label for="{{ form.name.id_for_label }}" class="form-label">Nome Completo</label>
+                                    <input id="name" type="text" name="name" maxlength="100" required placeholder="Nome Completo" class="form-control">
+                                    {% if form.name.help_text %}
+                                        <small class="form-text text-muted">{{ form.name.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in form.name.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
-                        </div>
-                        <div>
-                            <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
-                            {{ form.email }}
-                            {% if form.email.help_text %}
-                                <small class="form-text text-muted">{{ form.email.help_text }}</small>
-                            {% endif %}
-                            {% for error in form.email.errors %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ error }}
+                                <div class="mb-3">
+                                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                                    <input id="email" type="email" name="email" maxlength="100" required placeholder="seu@email.com" class="form-control">
+                                    {% if form.email.help_text %}
+                                        <small class="form-text text-muted">{{ form.email.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in form.email.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
-                        </div>
-                        <div>
-                            <label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
-                            {{ form.username }}
-                            {% if form.username.help_text %}
-                                <small class="form-text text-muted">{{ form.username.help_text }}</small>
-                            {% endif %}
-                            {% for error in form.username.errors %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ error }}
+                                <div class="mb-3">
+                                    <label for="{{ form.username.id_for_label }}" class="form-label">Usuário</label>
+                                    <input id="username" type="text" name="username" maxlength="100" required placeholder="Usuário" class="form-control">
+                                    {% if form.username.help_text %}
+                                        <small class="form-text text-muted">{{ form.username.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in form.username.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endfor %}
+                                <div class="form-check mb-3">
+                                    <input id="is_teacher" type="checkbox" name="is_teacher" class="form-check-input">
+                                    <label for="{{ form.is_teacher.id_for_label }}" class="form-check-label">Professor</label>
+                                    {% if form.is_teacher.help_text %}
+                                        <small class="form-text text-muted">{{ form.is_teacher.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in form.is_teacher.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-check mb-3">
+                                    <input id="is_student" type="checkbox" name="is_student" class="form-check-input">
+                                    <label for="{{ form.is_student.id_for_label }}" class="form-check-label">Estudante</label>
+                                    {% if form.is_student.help_text %}
+                                        <small class="form-text text-muted">{{ form.is_student.help_text }}</small>
+                                    {% endif %}
+                                    {% for error in form.is_student.errors %}
+                                        <div class="alert alert-danger" role="alert">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                            {% else %}
+                                <p>No user available.</p>
+                            {% endif %}
                         </div>
-                    {% else %}
-                        <p>No user available.</p>
-                    {% endif %}
+                        <input type="submit" value="Cadastrar" class="btn btn-primary btn-block">
+                        <div class="align-items text-center mb-3">
+                            <button type="button" class="btn" data-bs-toggle="button">Já tenho uma conta</button>
+                        </div>
+                    </form>
                 </div>
-                <input type="submit" value="Submit">
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</body>
 
+</html>
