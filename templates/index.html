@@ -14,7 +14,30 @@
 </head>
 
 <body>
+
     {% include "base/navbar.html" %}
+
+    <div class="container" style="display: flex; justify-content: center; flex-wrap: nowrap; padding-top: 20px; max-width: 100%;">
+        <div class="card" style="width: 30rem; margin: 10px; flex-shrink: 0;">
+            <img src="/static/images/teacher.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Seja um docente</h5>
+                <p class="card-text">Você poderá dar aulas sob demandas, criar combos, tudo isso você predefinindo a sua própria hora aula</p>
+                <a href="{% url 'users:register' %}" class="btn btn-primary">Cadastre-se</a>
+            </div>
+        </div>
+    
+        <div class="card" style="width: 30rem; margin: 10px; flex-shrink: 0;">
+            <img src="/static/images/teacher.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Seja um aluno</h5>
+                <p class="card-text">Você poderá dar aulas sob demandas, criar combos, tudo isso você predefinindo a sua própria hora aula</p>
+                <a href="{% url 'users:register' %}" class="btn btn-primary">Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+      
 </body>
 
 </html>
+
